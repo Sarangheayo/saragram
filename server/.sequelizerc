@@ -1,0 +1,10 @@
+const path = require('path');
+
+module.exports = {
+    config: path.resolve('databases', 'configs', 'sequelize-cli.config.js'),  
+    // '-' 인식 안되나, 한 단어로 인식시켜줘야해서 문자열 추가
+    'models-path': path.resolve('app', 'models'),  
+    'seeders-path': path.resolve('databases', 'seeders'),
+    'migrations-path': path.resolve('databases', 'migrations'),
+}
+
