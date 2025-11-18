@@ -4,8 +4,8 @@
 | **프로젝트명**     | meerketgram                                                |
 | **설명**        | 사용자들이 게시글과 댓글로 소통하는 커뮤니티형 웹앱                             |
 | **핵심 기능**     | 회원가입/로그인(JWT), 소셜 로그인, 권한(Role) 기반 접근, 사진 업로드, PWA 푸시 알림 |
-| **사용 기술**     | Vite + React 19 (프론트) / Express 7 (백엔드) / MySQL 8.4 (DB) |
-| **추가 기능(선택)** | 모바일 카메라 업로드, 지문 인증(WebAuthn)                             |
+| **사용 기술**     | Vite + React 19 (프론트) / Express 5 (백엔드) / MySQL 8.4 (DB) |
+| **SRS**     | [SRS_meertagram.xlsx](https://github.com/user-attachments/files/23586389/SRS_meertagram.xlsx) |
 
 <br>
 
@@ -46,6 +46,17 @@ meerkatgram/
 │   └── .env                # 환경 변수 설정 파일
 └── READEME.md
 ````
+
+<br>
+
+# 프로젝트 디자인
+<img width="1273" height="1221" alt="Image" src="https://github.com/user-attachments/assets/36813f6a-a155-4ffe-a341-8f4413fa4520" />
+
+<br>
+
+# ERD
+<img width="1773" height="982" alt="Image" src="https://github.com/user-attachments/assets/4ae34858-7936-415a-9081-d7b3435343d3" />
+
 <br>
 
 # 설치 라이브러리
@@ -61,6 +72,8 @@ npm install -D vite-plugin-pwa
 npm init
 npm i express express-validator morgan winston dotenv sequelize sequelize-cli mysql2 cookie-parser jsonwebtoken cors multer swagger-ui-express yaml dayjs bcrypt web-push
 npm install -D nodemon
+````
+
 ````
 
 # DB 테이블 설계안
