@@ -9,7 +9,6 @@ import { DataTypes } from 'sequelize';
 
 const modelName = 'User'; // 모델명(js 내부에서 사용)
 
-// 
 const attributes = {
   id: {
     field: 'id',
@@ -73,7 +72,7 @@ const attributes = {
     allowNull: true,
     comment: '작성일',
     get() {
-      const val = this.getDataValue('createAt');
+      const val = this.getDataValue('createdAt');
       if(!val) {
         return null;
       }
@@ -131,8 +130,13 @@ const User = {
     return define;
   },
   associate: (db) => {
-  
-  },
-}
+   // user가 부모, N이 자식인 1:1 관계
+   db.User.hasMany(db.Post, { sourceKey: 'userId', foreignKey: 'userId', as: 'post' }); // Post모델과의 관계
+   db.User.hasMany(db.PushSubscription, { sourceKey: 'userId', foreignKey: 'userId', as: 'push_subscription' }); // PushSubscription모델과의 관계
+   db.User.hasMany(db.Notification, { sourceKey: 'userId', foreignKey: 'userId', as: 'notification' }); // notification모델과의 관계
+   db.User.hasMany(db.Comment, { sourceKey: 'userId', foreignKey: 'userId', as: 'comment' }); // Comment모델과의 관계
+   db.User.hasMany(db.Like, { sourceKey: 'userId', foreignKey: 'userId', as: 'like' }); // Like모델과의 관계
+  }
+};
 
 export default User;
