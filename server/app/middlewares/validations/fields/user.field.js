@@ -27,7 +27,7 @@ const email = body('email').trim()
 .notEmpty().withMessage('이메일은 필수 항목입니다.')
 .bail()
 .isEmail().withMessage('유효한 이메일을 입력해주세요.')
-// 간단하게 체크할라면 할 수 있음 = isEmail
+// express에서 주는 걸로 간단하게 체크할라면 할 수 있음 = isEmail
 ;
 
 const password = body('password')
