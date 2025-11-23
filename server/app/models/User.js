@@ -131,11 +131,11 @@ const User = {
   },
   associate: (db) => {
    // user가 부모, N이 자식인 1:1 관계
-   db.User.hasMany(db.Post, { sourceKey: 'userId', foreignKey: 'userId', as: 'post' }); // Post모델과의 관계
-   db.User.hasMany(db.PushSubscription, { sourceKey: 'userId', foreignKey: 'userId', as: 'push_subscription' }); // PushSubscription모델과의 관계
-   db.User.hasMany(db.Notification, { sourceKey: 'userId', foreignKey: 'userId', as: 'notification' }); // notification모델과의 관계
-   db.User.hasMany(db.Comment, { sourceKey: 'userId', foreignKey: 'userId', as: 'comment' }); // Comment모델과의 관계
-   db.User.hasMany(db.Like, { sourceKey: 'userId', foreignKey: 'userId', as: 'like' }); // Like모델과의 관계
+   db.User.hasMany(db.Post, { sourceKey: 'userId', foreignKey: 'userId', as: 'posts' }); // Post모델과의 관계
+   db.User.hasMany(db.PushSubscription, { sourceKey: 'userId', foreignKey: 'userId', as: 'pushSubscriptions' }); // PushSubscription모델과의 관계
+   db.User.hasMany(db.Notification, { sourceKey: 'userId', foreignKey: 'userId', as: 'notifications' }); // notification모델과의 관계
+   db.User.hasMany(db.Comment, { sourceKey: 'userId', foreignKey: 'userId', as: 'comments' }); // Comment모델과의 관계
+   db.User.hasMany(db.Like, { sourceKey: 'userId', foreignKey: 'userId', as: 'likes' }); // Like모델과의 관계
   }
 };
 

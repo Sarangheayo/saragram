@@ -104,8 +104,8 @@ const Post = {
   db.Post.belongsTo(db.User, { targetKey: 'userId', foreignKey: 'userId', as: 'user' }); // User모델과의 관계
 
   // Post가 부모이고 자식이 1:多인 관계
-  db.Post.hasMany(db.Like, { sourceKey: 'postId', foreignKey: 'postId', as: 'likes' }); // Like모델과의 관계
-  db.Post.hasMany(db.Comment, { sourceKey: 'postId', foreignKey: 'postId', as: 'comments' }); // Comment모델과의 관계
+  db.Post.hasMany(db.Like, { sourceKey: 'postId'||'userId', foreignKey: 'postId'||'userId', as: 'likes' }); // Like모델과의 관계
+  db.Post.hasMany(db.Comment, { sourceKey: 'postId'||'userId', foreignKey: 'postId'||'userId', as: 'comments' }); // Comment모델과의 관계
 
   }
 };
