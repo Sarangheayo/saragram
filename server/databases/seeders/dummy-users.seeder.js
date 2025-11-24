@@ -26,7 +26,7 @@ const tableName = 'users';
          // 리프레시 토큰 필요 X
          // bulkInsert는 model 객체 X, CRUD가 자동관리 안됨. 
          created_at: new Date(),
-         updated_at: new Date(),
+         updated_at: new Date()
        },
        {
          email: 'admin2@admin.com',
@@ -39,8 +39,8 @@ const tableName = 'users';
          // 리프레시 토큰 필요 X
          // bulkInsert는 model 객체 X, CRUD가 자동관리 안됨. 
          created_at: new Date(),
-         updated_at: new Date(),
-       },
+         updated_at: new Date()
+       }
      ]; 
    
    // 데이터 생성: await queryInterface.bulkInsert(tableName, records, options );

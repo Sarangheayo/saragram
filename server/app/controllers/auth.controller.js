@@ -29,7 +29,8 @@ async function login(req, res, next) {
   
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
   } catch(error) {
-    return res.status(500).send(error.message);
+    // return res.status(500).send(error.message);
+    next(error);
   }
 }
 

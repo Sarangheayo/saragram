@@ -107,8 +107,7 @@ const Notification = {
     return define;
   },
   associate: (db) => {
-   // user가 부모, post가 자식인 1:1 관계
-   db.Notification.belongsTo(db.User, { targetKey: 'userId', foreignKey: 'userId', as: 'notification' }); // User모델과의 관계
+   db.Notification.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' }); // User모델과의 관계
   }
 };
 

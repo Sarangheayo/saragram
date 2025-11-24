@@ -106,9 +106,9 @@ const Comment = {
     return define;
   },
   associate: (db) => {
-  db.Comment.belongsTo(db.User, { targetKey: 'userId', foreignKey: 'userId', as: 'user' }); // User모델과의 관계
+  db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' }); // User모델과의 관계
 
-  db.Comment.belongsTo(db.Post, { targetKey: 'postId', foreignKey: 'postId', as: 'post' }); // Post모델과의 관계
+  db.Comment.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'post' }); // Post모델과의 관계
   }
 };
 

@@ -6,6 +6,8 @@
 
 import bcrypt from 'bcrypt'; // binary = 컴터가 인식하는 가장 작은 단위 / encrypt = 암호화
 import userRepository from "../repositories/user.repository.js";
+import { NOT_REGISTERD_ERROR } from '../../configs/responseCode.config.js';
+import myError from "../errors/customs/my.error.js"
 
 /**
  * 
@@ -21,14 +23,14 @@ async function login(body) {
 
   // 유저 존재 여부 체크
   if(!result) {
-    throw new Error('유저 없음'); 
+    throw myError('유저 미존재', NOT_REGISTERD_ERROR ); 
   } 
 
   // 비밀번호 체크 
   // 유저에게 받은 평문을 암호화할 때 로직을 만들어주기 -> 
   // bcrypt : 얘가 만들어 줌. 같은지 검사해주는 method가 이미 존재함   
   if(!bcrypt.compareSync(password, result.password)) {
-    throw new Error('비밀번호 틀림'); // 실제 로직에서는 '아디 또는 비번이 틀렸습니다'라고 줘야함 / 해커가 가입여부 모르게
+    throw myError('비밀번호 틀림', NOT_REGISTERD_ERROR); // 실제 로직에서는 '아디 또는 비번이 틀렸습니다'라고 줘야함 / 해커가 가입여부 모르게
   }
 
   return result;

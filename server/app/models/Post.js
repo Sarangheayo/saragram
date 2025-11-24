@@ -101,11 +101,12 @@ const Post = {
     return define;
   },
   associate: (db) => {
-  db.Post.belongsTo(db.User, { targetKey: 'userId', foreignKey: 'userId', as: 'user' }); // User모델과의 관계
+  // 1:1인 관계라 별칭 단수
+  db.Post.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' }); // User모델과의 관계
 
   // Post가 부모이고 자식이 1:多인 관계
-  db.Post.hasMany(db.Like, { sourceKey: 'postId'||'userId', foreignKey: 'postId'||'userId', as: 'likes' }); // Like모델과의 관계
-  db.Post.hasMany(db.Comment, { sourceKey: 'postId'||'userId', foreignKey: 'postId'||'userId', as: 'comments' }); // Comment모델과의 관계
+  db.Post.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'postId', as: 'likes' }); // Like모델과의 관계
+  db.Post.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'postId', as: 'comments' }); // Comment모델과의 관계
 
   }
 };

@@ -94,9 +94,9 @@ const Like = {
     return define;
   },
   associate: (db) => {
-  db.Like.belongsTo(db.User, { targetKey: 'userId', foreignKey: 'userId', as: 'user' }); // User모델과의 관계
+  db.Like.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' }); // User모델과의 관계
 
-  db.Like.belongsTo(db.Post, { targetKey: 'postId', foreignKey: 'postId', as: 'post' }); // Post모델과의 관계
+  db.Like.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'post' }); // Post모델과의 관계, 게시글을 기준으로 like를 보통 가져오니 사용은 별로 X 
   }
 };
 
