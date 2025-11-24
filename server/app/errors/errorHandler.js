@@ -7,6 +7,7 @@
 import { BaseError } from "sequelize";
 import { DB_ERROR, SYSTEM_ERROR } from "../../configs/responseCode.config.js";
 import { createBaseResponse } from "../utils/createBaseResponse.util.js";
+import { logger } from "../middlewares/loggers/winston.logger.js";
 
 /**
  * 에러 핸들러
@@ -29,10 +30,13 @@ export default function errorHandler(err, req, res, next) {
   if(!err.codeInfo) {
     err.codeInfo = SYSTEM_ERROR;
   }
-  // 개발 모드일 경우 콘솔로 에러 로그 출력
-  // TODO : 나중에 추가
 
   // 시스템 에러 및 DB에러 일 경우, 로그 출력
+  if(err.codeInfo.code === SYSTEM_ERROR.code || err.codeInfo.code === DB_ERROR.code) {
+    logger.error(`${err.name}: ${err.message}\n${err.stack}`);
+  }
+
+   // 개발 모드일 경우 콘솔로 에러 로그 출력
   if(process.env.APP_MODE === 'dev') {
     console.log(err.stack);
   }

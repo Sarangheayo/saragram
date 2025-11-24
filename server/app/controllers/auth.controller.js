@@ -23,7 +23,7 @@ import authService from "../services/auth.service.js";
 async function login(req, res, next) {
   try {
     const body = req.body; // 파라미터 획득
-    
+  
     // 로그인 서비스 호출
     const result = await authService.login(body);
   
