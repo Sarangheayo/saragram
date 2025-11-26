@@ -8,11 +8,15 @@ import express from 'express';
 import { authController } from '../app/controllers/auth.controller.js';
 import loginValidator from '../app/middlewares/validations/validators/auth/login.validator.js';
 import validationHandler from '../app/middlewares/validations/validationHandler.js';
+import authMiddleware from '../app/middlewares/auth/auth.middleware.js';
 
 const authRouter = express.Router(); 
 
 // 인증 정보 생성이니 post
 authRouter.post('/login', loginValidator, validationHandler, authController.login);
+authRouter.post('/reissue', authMiddleware, (req, res, next) => {
+  return res.send('reissue test');
+});
 // 처리종료 됨. return까지 완벽히 종료 가능 
 
 export default authRouter;
