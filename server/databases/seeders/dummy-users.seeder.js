@@ -34,7 +34,7 @@ const tableName = 'users';
          // 여기서 10 = salt = 소금, 얘는 비동기임
          nick: '설아관리자2',
          provider: 'KAKAO',
-         role: 'NOMAL',
+         role: 'NORMAL',
          profile: '',
          // 리프레시 토큰 필요 X
          // bulkInsert는 model 객체 X, CRUD가 자동관리 안됨. 

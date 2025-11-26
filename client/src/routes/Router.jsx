@@ -23,6 +23,8 @@ const router = createBrowserRouter([
         path: '/posts',
         element: <PostIndex />
       }
+      // delete는 모달이므로 라우터에 넣지말고 나머지 라우터에 넣어서 해당 주소를 
+      // 넣으면 뜨게 해줘! 
     ]
   }
 ]);
