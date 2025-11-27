@@ -26,7 +26,7 @@ function authenticate(req) {
 
   // request 객체에 사용자 정보를 추가
   req.user = {
-    id: parseInt(claims.sub),
+    id: (claims.sub),
     role: claims.role
   }
 } 
