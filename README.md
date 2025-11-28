@@ -74,8 +74,6 @@ npm i express express-validator morgan winston dotenv sequelize sequelize-cli my
 npm install -D nodemon
 ````
 
-````
-
 # DB 테이블 설계안
 ### users (회원 정보)
 | 컬럼명           | 타입                              | 설명          |
