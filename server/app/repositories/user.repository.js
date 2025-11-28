@@ -20,12 +20,10 @@ const { User } = db;
      {
       where: {
         email: email
-      } 
-     },
-     {
+      },
       transaction: t
-     }
-   );
+    }
+  );
 }
 
 /**
