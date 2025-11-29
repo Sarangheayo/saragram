@@ -12,7 +12,11 @@ import jwtUtil from '../utils/jwt/jwt.util.js';
 // import { logger } from "../middlewares/loggers/winston.logger.js"
 import db from "../models/index.js"
 
-
+/**
+ * login
+ * @param {{emali: string, password: string}}} body 
+ * @returns {Promise<import("../models/User.js").User>}
+ */
 async function login(body) {
   // 트렌젝션 처리 
   return await db.sequelize.transaction(async t => {

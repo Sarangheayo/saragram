@@ -38,6 +38,15 @@ function authenticate(req) {
 function authorize(req) {
   // 요청에 맞는 권한 규칙 조회
   const matchRole = ROLE_PERMISSIONS[req.method].find(item => {
+    // console.log(
+    //   // http://localhost:3000/api/auth/login?id=1
+    //   req.originalUrl, // 유저가 보내온 전체 Path + Queries, `/api/auth/login?id=1`
+    //   req.baseUrl,  // 프리픽스로 묶은 Path, `/api/auth`
+    //   req.path      // `baseUrl`을 제외한 Path, `/login`
+    // );
+
+    // express는 경우에 따라 가장 마지막에 `/`를 붙이는 경우도 있어서, 그럴 경우 가장 마지막 `/`제거
+    const path = req.path.endsWith('/') ? req.path.slice(0, -1) : req.path;
     return item.path.test(`${req.baseUrl}${req.path}`);
   });
 

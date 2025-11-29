@@ -23,21 +23,24 @@ import { body } from "express-validator";
 // // pw체크는 이걸로 정규식해주는게 가장 간단합니당
 // ;
 
-const email = body('email').trim()
-.notEmpty().withMessage('이메일은 필수 항목입니다.')
-.bail()
-.isEmail().withMessage('유효한 이메일을 입력해주세요.')
+const email = body('email')
+  .trim()
+  .notEmpty()
+  .withMessage('이메일은 필수 항목입니다.')
+  .bail()
+  .isEmail()
+  .withMessage('유효한 이메일을 입력해주세요.')
 // express에서 주는 걸로 간단하게 체크할라면 할 수 있음 = isEmail
 ;
 
 const password = body('password')
-.trim()
-.notEmpty()
-.withMessage('비밀번호는 필수 항목입니다.')
-.bail()
-.matches(/^[a-zA-Z0-9!@#$]{8,20}$/)
-.withMessage('영어대소문자·숫자·!·@·#·$ 8~20자 허용')
-// pw체크는 이걸로 정규식해주는게 가장 간단합니당
+  .trim()
+  .notEmpty()
+  .withMessage('비밀번호는 필수 항목입니다.')
+  .bail()
+  .matches(/^[a-zA-Z0-9!@#$]{8,20}$/)
+  .withMessage('영어대소문자·숫자·!·@·#·$ 8~20자 허용')
+  // pw체크는 이걸로 정규식해주는게 가장 간단합니당
 ;
 
 export default {
