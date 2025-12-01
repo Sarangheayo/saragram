@@ -14,9 +14,9 @@ const authRouter = express.Router();
 
 // 인증 정보 생성이니 post
 authRouter.post('/login', loginValidator, validationHandler, authController.login);
-authRouter.post('/reissue', authMiddleware, (req, res, next) => {
-  return res.send('reissue test');
-});
+authRouter.post('/reissue', authController.reissue); 
+
+
 // 처리종료 됨. return까지 완벽히 종료 가능 
 
 export default authRouter;

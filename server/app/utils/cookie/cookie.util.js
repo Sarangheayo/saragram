@@ -18,6 +18,7 @@ import dayjs from "dayjs"
  * @param {boolean} secureFlg 
  */
 function setCookie(res, cookieName, cookieValue, ttl, httpOnlyFlg = true, secureFlg = false) {
+  // setCookieRefreshToken가 통과 시 이 함수가 호출됨 -> 자동 통과  
   res.cookie(
     cookieName,
     cookieValue,
@@ -29,7 +30,25 @@ function setCookie(res, cookieName, cookieValue, ttl, httpOnlyFlg = true, secure
     }
   );
 }
- 
+
+/**
+ * 특정 쿠키 획득(미존재 시, 빈문자열 반환)
+ * @param {import("express").Request} req 
+ * @param {string} cookieName 
+ * @return {string} cookieValue
+ */
+function getCookie(req, cookieName) {
+  let cookieValue = '';
+  // const가 아닌 이유: 미존재 시 빈문자열 할당 위해
+
+  if (req.cookies) {
+    // cookie가 존재하지 않을 수도 있으니 체크
+    cookieValue = req.cookies[cookieName];
+    // 미존재 시, undefined 방지 = 빈문자열 할당 -> 빈문자열 그대로 반환
+  }
+  return cookieValue;
+}
+
 // ------------------
 // ----- pubilc -----
 // ------------------
@@ -40,6 +59,7 @@ function setCookie(res, cookieName, cookieValue, ttl, httpOnlyFlg = true, secure
  * @param {string} refreshToken 
  */
 function setCookieRefreshToken(res, refreshToken) {
+  // 쿠키에 리프래시 토큰 설정
   setCookie(
     res,
     process.env.JWT_REFRESH_TOKEN_COOKIE_NAME,
@@ -50,6 +70,21 @@ function setCookieRefreshToken(res, refreshToken) {
   );
 }
 
+/**
+ * 쿠키에서 리프래시 토큰 획득
+ * @param {import("express").Request} req
+ * @return {string} refreshToken
+ */
+function getCookieRefreshToken(req) {
+  return getCookie(req, process.env.JWT_REFRESH_TOKEN_COOKIE_NAME);
+  
+}
+
+
+// ------------------
+// export
+// ------------------
 export default {
   setCookieRefreshToken,
+  getCookieRefreshToken
 }

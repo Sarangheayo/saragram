@@ -108,6 +108,9 @@ const Post = {
   db.Post.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'postId', as: 'likes' }); // Like모델과의 관계
   db.Post.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'postId', as: 'comments' }); // Comment모델과의 관계
 
+  // onDelete: 'CASCADE' 옵션을 주지 않아도, foreign key 제약 조건 때문에 부모가 삭제되면 자식도 같이 삭제됨
+  // onDelete: 'restrict' 옵션을 주면, 부모가 삭제될 때 자식이 있으면 삭제 불가
+
   }
 };
 

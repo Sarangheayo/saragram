@@ -57,14 +57,18 @@ async function show(req, res, next) {
 async function store(req, res, next) {
   try {
     const data = {
-      userId: req.user.id,
+      userId: req.user.id, // auth.middleware.js에서 req.user 셋팅됨
       content: req.body.content,
       image: req.body.image,
     };
 
+    // api를 만든다면 req.user의 pk값을 이용해 작성자 정보를 가져오는 것이 가능함
+
     const result = await postsService.create(data);
+    // service에서 반환된 생성된 게시글 정보를 result에 할당 
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
+    // db에서 반환된 생성된 게시글 정보를 클라이언트에 응답
   } catch(error) {
     return next(error);
   }
@@ -80,13 +84,16 @@ async function store(req, res, next) {
 async function destroy(req, res, next) {
   try {
     const data = {
-      userId: req.user.id,
-      postId: req.params.id
+      userId: req.user.id, // auth.middleware.js에서 req.user 셋팅됨
+      postId: req.params.id // 삭제할 게시글 id 
+      // 위둘이 조합되어야만 삭제 가능 (본인 글만 삭제 가능하도록)
     };
 
     await postsService.destroy(data);
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS));
+    // 담는 데이터는 없으므로 SUCCESS 코드만 응답
+    // 삭제가 완료되었음을 클라이언트에 응답
   } catch(error) {
     return next(error);
   }

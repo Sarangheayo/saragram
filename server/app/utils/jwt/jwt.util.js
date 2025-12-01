@@ -102,6 +102,7 @@ function getClaimsWithVerifyToken(token) {
       throw myError('토큰 이상', INVALID_TOKEN_ERROR);
     } else {
       throw error;
+      // 알 수 없는 에러는 그대로 throw -> systemError로 처리
     }
   }
 }

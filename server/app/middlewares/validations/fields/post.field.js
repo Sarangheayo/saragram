@@ -40,6 +40,7 @@ export const image = body('image')
   .withMessage('이미지는 필수 항목입니다.')
   .bail()
   .custom(val => {
+    // 우리 앱의 게시글 이미지에 접근하는 `도메인 + path` = 이미지 경로가 올바른지 검사
     if(!val.startsWith(`${process.env.APP_URL}${process.env.ACCESS_FILE_POST_IMAGE_PATH}`)) {
       return false;
     }
@@ -51,6 +52,7 @@ export const image = body('image')
   .custom(val => {
     const splitPath = val.split('/');
     const fullPath = path.join(pathUtil.getPostsImagePath(), splitPath[splitPath.length - 1]);
+    // 이미지 파일이 실제로 존재하는지 검사 /sarah/workspace/saragram/server/storage/images/posts
     console.log(fullPath);
     if(!fs.existsSync(fullPath)) {
       return false;

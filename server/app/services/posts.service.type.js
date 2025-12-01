@@ -1,11 +1,11 @@
 /**
  * @file app/services/posts.service.type.js
  * @description posts Service Types
- * 251129 park init
+ * 251129 v1.0.0 sara init
  */
 
 /**
- * 페잊 타입
+ * 페이지 타입
  * @typedef {number} Page
  */
 
