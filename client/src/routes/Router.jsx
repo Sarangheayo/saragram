@@ -4,7 +4,7 @@ import Login from "../components/auth/Login.jsx";
 import PostIndex from "../components/posts/PostIndex.jsx";
 import Registration from "../components/users/Registration.jsx";
 import UserInfo from "../components/users/UserInfo.jsx";
-import PostsShow from "../components/posts/PostShow.jsx";
+import PostShow from "../components/posts/PostShow.jsx";
 import PostCreate from "../components/posts/PostCreate.jsx";
 
 const router = createBrowserRouter([
@@ -19,29 +19,28 @@ const router = createBrowserRouter([
           return redirect('/posts');
         }
       },
-      {
+      { // 로그인 페이지
         path: '/login',
         element: <Login />
       },
-      {
-        path: '/posts',
-        element: <PostIndex />
-      },
-      // delete는 모달이므로 라우터에 넣지말고 나머지 라우터에 넣어서 해당 주소를 
-      // 넣으면 뜨게 해줘! 
-      {
+      // delete는 모달이므로 라우터에 넣지말고 컴포넌트 내부에서 처리
+      { // 회원가입 페이지
         path: '/registration',
         element: <Registration />
       },
-      {  
-        path: '/users',
+      { // 사용자 정보 페이지
+        path: '/users/:id',
         element: <UserInfo />
       },
-      {
-        path: '/posts/show/:id',
-        element: <PostsShow />
+      { // 게시글 목록 페이지
+        path: '/posts',
+        element: <PostIndex />
       },
-      {
+      { // 특정 포스트 상세 페이지
+        path: '/posts/show/:id',
+        element: <PostShow />
+      },
+      { // 새로운 포스트 작성 페이지
         path: '/posts/create',
         element: <PostCreate />
       },

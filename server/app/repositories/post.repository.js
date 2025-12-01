@@ -4,6 +4,34 @@
  * 251128 v1.0.0 sara init 
  */
 
+// /**
+//  * 게시글 페이지네이션
+//  * @param {import("sequelize").Transaction|null} t 
+//  * @param {{limit: number, offset: number}} data 
+//  * @returns {Promise<Array<import("../models/Post.js").Post>>}
+//  */
+// import db from "../models/index.js";
+// const { sequelize, Post, Comment } = db;
+
+// async function pagination(t = null, data) {
+//   return await Post.findAnd(
+//     // data,
+//     {
+//       order: [
+//         ['createdAt', 'DESC'],
+//         ['updatedAt', 'DESC'],
+//         ['id', 'ASC']
+//       ],
+//       limit: data.limit,
+//       offset: data.offset
+//     },
+//     {
+//       transaction: t,
+//     }
+//   )
+// }
+
+
 /**
  * 게시글 페이지네이션
  * @param {import("sequelize").Transaction|null} t 
@@ -14,8 +42,7 @@ import db from "../models/index.js";
 const { sequelize, Post, Comment } = db;
 
 async function pagination(t = null, data) {
-  return await Post.findAll(
-    // data,
+  return await Post.findAndCountAll(
     {
       order: [
         ['createdAt', 'DESC'],
@@ -23,12 +50,10 @@ async function pagination(t = null, data) {
         ['id', 'ASC']
       ],
       limit: data.limit,
-      offset: data.offset
-    },
-    {
+      offset: data.offset,
       transaction: t,
-    }
-  )
+    },
+  );
 }
 
 /**

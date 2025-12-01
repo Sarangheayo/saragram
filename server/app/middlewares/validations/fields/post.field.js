@@ -4,13 +4,14 @@
  * 251128 v1.0.0 sara init 
  */
 
-import { body, param } from "express-validator";
+import { body, param, query } from "express-validator";
 import fs from 'fs';
 import pathUtil from "../../../utils/path/path.util.js";
 import path from "path";
 
 // 페이지 필드
-export const page = body('page')
+export const page = query('page')
+  // 요청 쿼리스트링에서 page 값 가져오기 예 : /api/posts?page=1
   .trim()
   .optional()
   .isNumeric()
