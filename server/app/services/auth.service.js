@@ -6,11 +6,11 @@
 
 import bcrypt from 'bcrypt'; // binary = 컴터가 인식하는 가장 작은 단위 / encrypt = 암호화
 import userRepository from "../repositories/user.repository.js";
-import { NOT_REGISTERED_ERROR } from '../../configs/responseCode.config.js';
+import { NOT_REGISTERED_ERROR, REISSUE_ERROR } from '../../configs/responseCode.config.js';
 import myError from "../errors/customs/my.error.js"
 import jwtUtil from '../utils/jwt/jwt.util.js';
 // import { logger } from "../middlewares/loggers/winston.logger.js"
-import db from "../models/index.js"
+import db from "../models/index.js";
 
 /**
  * login

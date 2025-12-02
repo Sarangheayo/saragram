@@ -26,7 +26,7 @@ function setCookie(res, cookieName, cookieValue, ttl, httpOnlyFlg = true, secure
       expires: dayjs().add(ttl, 'second').toDate(),
       httpOnly: httpOnlyFlg,
       secure: secureFlg,
-      sameSite: 'none',
+      sameSite: 'none'
     }
   );
 }
