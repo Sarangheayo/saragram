@@ -107,9 +107,9 @@ const Comment = {
   },
   associate: (db) => {
   db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'author' }); // User모델과의 관계
-
   db.Comment.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'post' }); // Post모델과의 관계
-  }
+  db.Comment.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'replyId', as: 'replies' }); // self join
+  },
 };
 
 export default Comment;

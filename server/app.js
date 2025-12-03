@@ -16,6 +16,7 @@ import postRouter from './routes/posts.router.js';
 import notFoundRouter from './routes/notFound.router.js';
 import pathUtil from './app/utils/path/path.util.js';
 import cookieParser from 'cookie-parser';
+import commentsRouter from './routes/comments.router.js';
 
 const app = express();
 app.use(express.json()); // json 요청 파싱 처리
@@ -42,6 +43,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/files', filesRouter);
+app.use('/api/comments', commentsRouter);
 
 // 404 not found 처리
 app.use(notFoundRouter);

@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './PostIndex.css';
 import { useEffect } from 'react';
 import { postIndexThunk } from '../../store/thunks/postIndexThunk.js';
 
 export default function PostIndex() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { list, page, isLasted } = useSelector(state => state.postIndex);
   // backend에서 받아온 post 목록을 보여주는 컴포넌트 : lifecycle method에서 postIndexThunk 실행 필요
@@ -23,13 +25,25 @@ export default function PostIndex() {
   function nextPage() {
     dispatch(postIndexThunk(page + 1));
   }
+  
+  function redirectPostShow(id) {
+    navigate(`/posts/show/${id}`);
+  };
+
   return (
     <>
       <div className="post-index-container">
         <div className="post-index-card-box">
           {
             list && list.map(item => {
-              return <div className="post-index-card" style={{backgroundImage: `url(${item.image})`}} key={item.id}></div>
+              return (
+                <div 
+                  className="post-index-card" 
+                  style={{backgroundImage: `url(${item.image})`}} 
+                  key={item.id}
+                  onClick={() => {redirectPostShow(item.id)}}
+                ></div>
+              ) 
             })
           }  
         </div>
@@ -45,3 +59,4 @@ export default function PostIndex() {
 // 더 불러올 페이지가 없는 경우 버튼 숨기기
 // { !isLasted && <button type="button" className='btn-full-width bg-gray'
 // onClick={nextPage} >Show more posts</button> }
+// /posts/show/:id(클릭한 아이템의 아이디 = key={item.id})

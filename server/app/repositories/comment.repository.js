@@ -22,6 +22,11 @@ async function destroy(t = null, id) {
   );
 }
 
+async function create(t = null, data) {
+  return await Comment.create( data, { transaction: t }); // 이 데이터 안에는 postId, userId, content 가 들어있음
+}
+
 export default {
   destroy,
+  create
 }
