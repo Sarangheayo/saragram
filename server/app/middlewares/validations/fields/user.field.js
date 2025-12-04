@@ -3,7 +3,8 @@
  * @description 유저 정보 유효성 검사 필드
  * 251119 v1.0.0 sara init 
  */
-import { body } from "express-validator";
+import { body, param } from "express-validator";
+import PROVIDER from "../../auth/configs/provider.enum.js";
 
 // export const email = body('email')
 // .notEmpty()
@@ -43,7 +44,18 @@ const password = body('password')
   // pw체크는 이걸로 정규식해주는게 가장 간단합니당
 ;
 
+const provider = param('provider')
+  .trim()
+  .notEmpty()
+  .withMessage('필수항목입니다.')
+  .bail()
+  .custom(val => {
+    return PROVIDER[val.toUpperCase()] ? true : false;
+  })
+  .withMessage('허용하지 않는 값입니다.')
+
 export default {
   email,
   password,
+  provider
 };

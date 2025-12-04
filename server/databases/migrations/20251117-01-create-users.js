@@ -57,7 +57,7 @@ const attributes = {
   }, 
   profile: {
     field: 'profile',
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(255),
     allowNull: false,
     comment: 'user profile',
   },

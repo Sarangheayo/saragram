@@ -9,6 +9,8 @@ import { REISSUE_ERROR, SUCCESS } from "../../configs/responseCode.config.js";
 import authService from "../services/auth.service.js";
 import cookieUtil from "../utils/cookie/cookie.util.js";
 import myError from "../errors/customs/my.error.js";
+import PROVIDER from "../middlewares/auth/configs/provider.enum.js";
+import socialKakaoUtil from "../utils/social/social.kakao.util.js";
 
 // ------------------
 // ----- pubilc -----
@@ -70,10 +72,67 @@ async function reissue(req, res, next) {
   }
 }
 
+/**
+ * 소셜로그인 컨트롤러 처리
+ * @param {import("express").Request} req - 리퀘스트 객체
+ * @param {import("express").Response} res - 레스폰스 객체
+ * @param {import("express").NextFunction} next = 넥스트 객체
+ * @returns
+ */
+
+async function social(req, res, next) {
+  const provider = req.params.provider.toUpperCase(); 
+  try {
+    let url = '';
+
+    switch(provider) {
+      case PROVIDER.KAKAO:
+        url = socialKakaoUtil.getAuthorizeURL();
+        break;
+    }
+
+    return res.redirect(url);
+  } catch(error) {
+    next(error);
+  }
+}
+
+/**
+ * 소셜로그인 콜백 컨트롤러 처리
+ * @param {import("express").Request} req - 리퀘스트 객체
+ * @param {import("express").Response} res - 레스폰스 객체
+ * @param {import("express").NextFunction} next = 넥스트 객체
+ * @returns
+ */
+async function socialCallback(req, res, next) {
+  try {
+
+    const provider = req.params.provider.toUpperCase();
+    let refreshToken = null;
+    let code = null;
+
+    switch(provider) {
+      case PROVIDER.KAKAO:
+        code = req.query?.code;
+        refreshToken = await authService.socialKakao(code);
+        break;
+    }
+
+    // Cookie에 RefreshToken 설정
+    cookieUtil.setCookieRefreshToken(res, refreshToken);
+    
+    return res.redirect(process.env.SOCIAL_CLIENT_CALLBACK_URL);
+  } catch(error) {
+    next(error)
+  }
+}
+
 // ------------------
 // export
 // ------------------
 export const authController = {
   login,
   reissue,
+  social,
+  socialCallback
 };

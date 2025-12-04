@@ -21,7 +21,7 @@ export default function UserInfo() {
   return (
     <>
       <div className="user-info-container bottom-line">
-        <div className="profile profile-medium" style={{backgroundImage: `url("${user?.profileImage}")`}}></div>
+        <div className="profile profile-medium" style={{backgroundImage: `url("${user?.profile}")`}}></div>
         <div className="user-info-controll-box">
           <div className="user-info-stat-items">
             <p className='user-info-stat-name'>{user?.nick}</p>

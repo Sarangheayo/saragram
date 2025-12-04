@@ -48,8 +48,14 @@ async function findByPk(t = null, id) {
   // 첫번째 인자: PK 값, 두 번째 인자: 옵션 (트랜잭션 포함)
 }
 
+async function create(t = null, data) {
+  return await User.create(data, { transaction: t });
+}
+
 export default {
   findByEmail,
   save,
-  findByPk
+  findByPk,
+  create,
 };
+
