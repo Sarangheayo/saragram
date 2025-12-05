@@ -9,6 +9,8 @@ export default function PostIndex() {
   const dispatch = useDispatch();
   const { list, page, isLasted } = useSelector(state => state.postIndex);
   // backend에서 받아온 post 목록을 보여주는 컴포넌트 : lifecycle method에서 postIndexThunk 실행 필요
+
+  
   useEffect(() => {
     //다른 페이지 다녀와서 돌아올 때도 실행되지 않도록 빈 배열 넣기
     // ex: useEffect(() => { ... }, []);

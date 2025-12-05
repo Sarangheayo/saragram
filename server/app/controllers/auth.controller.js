@@ -15,6 +15,7 @@ import socialKakaoUtil from "../utils/social/social.kakao.util.js";
 // ------------------
 // ----- pubilc -----
 // ------------------
+
 /**
  * 로그인 컨트롤러 처리
  * @param {import("express").Request} req - 리퀘스트 객체
@@ -22,7 +23,6 @@ import socialKakaoUtil from "../utils/social/social.kakao.util.js";
  * @param {import("express").NextFunction} next = 넥스트 객체
  * @returns
  */
-
 // login 대신 signIn도 ㄱㅊ 함수 이름은 아무거나 괜찮
 async function login(req, res, next) {
   try {
@@ -42,6 +42,28 @@ async function login(req, res, next) {
   }
 }
 
+/**
+ * 로그인 컨트롤러 처리
+ * @param {import("express").Request} req - 리퀘스트 객체
+ * @param {import("express").Response} res - 레스폰스 객체
+ * @param {import("express").NextFunction} next = 넥스트 객체
+ * @returns
+ */
+async function logout(req, res, next) {
+  try {
+    const id = req.user.id;
+    
+    // 로그아웃 서비스 호출
+    await authService.logout(id);
+
+    // cookie에 refresh token 만료
+    cookieUtil.clearCookieRefreshToken(res);
+    
+    return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS));
+  } catch(error) {
+    next(error);
+  }
+}
 
 /**
  * 토큰 재발급 컨트롤러 처리
@@ -50,7 +72,6 @@ async function login(req, res, next) {
  * @param {import("express").NextFunction} next = 넥스트 객체
  * @returns
  */
-
 async function reissue(req, res, next) {
   try {
     const token = cookieUtil.getCookieRefreshToken(req);
@@ -79,7 +100,6 @@ async function reissue(req, res, next) {
  * @param {import("express").NextFunction} next = 넥스트 객체
  * @returns
  */
-
 async function social(req, res, next) {
   const provider = req.params.provider.toUpperCase(); 
   try {
@@ -132,6 +152,7 @@ async function socialCallback(req, res, next) {
 // ------------------
 export const authController = {
   login,
+  logout,
   reissue,
   social,
   socialCallback

@@ -1,16 +1,17 @@
 import './PostDelete.css';
 
-export default function PostDelete({setCloseDeleteModal}) {
+export default function PostDelete({id, setCloseDeleteModal}) {
   return (
     <>
       <div className="post-delete-container">
         <div className="post-delete-content-box bg-light">
           <div className="post-delete-content-info">
-            <p>삭제된 게시글은 되돌릴 수 없습니다.</p>
+            <p>삭제된 게시글은 되돌릴 수 없습니다.{id}</p>
             <br />
             <p>정말 삭제하시겠습니까?</p>
           </div>
           <div className="post-delete-btn-box">
+            {/* 삭제 완료 후 post redirect + 모달 닫기 */}
             <button type="button" className='btn-medium bg-dark'>Delete</button>
             <button type="button" className='btn-medium bg-gray' onClick={setCloseDeleteModal}>Cancel</button>
           </div>

@@ -43,6 +43,10 @@ export default function Login() {
     window.location.replace(`/api/auth/social/${provider}`); // redirect 처리
   }
 
+  function redirectRegistration() {
+    return navigate('/registration');
+  }
+
   return (
     <>
       <form className="login-container" onSubmit={handleLogin}>
@@ -53,7 +57,7 @@ export default function Login() {
         <button type="submit" className="btn-big bg-gray">Log in</button>
         <div className="text-on-line">or</div>
         <button type="button" className="btn-big bg-img-kakao" onClick={() => {handleSocial('kakao')}} ></button>
-        <button type="button" className="btn-big bg-light">Sign up</button>
+        <button type="button" onClick={redirectRegistration} className="btn-big bg-light">Sign up</button>
       </form>
     </>
   )

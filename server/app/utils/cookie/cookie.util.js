@@ -5,6 +5,7 @@
  */
 
 import dayjs from "dayjs"
+import { response } from "express";
 
 // ------------------
 // ----- private ----
@@ -16,19 +17,25 @@ import dayjs from "dayjs"
  * @param {number} ttl 
  * @param {boolean} httpOnlyFlg 
  * @param {boolean} secureFlg 
+ * @param {string|null} path
  */
-function setCookie(res, cookieName, cookieValue, ttl, httpOnlyFlg = true, secureFlg = false) {
-  // setCookieRefreshToken가 통과 시 이 함수가 호출됨 -> 자동 통과  
-  res.cookie(
-    cookieName,
-    cookieValue,
-    {
+function setCookie(res, cookieName, cookieValue, ttl, httpOnlyFlg = true, secureFlg = false, path = null) {
+  const options = {
       expires: dayjs().add(ttl, 'second').toDate(),
       httpOnly: httpOnlyFlg,
       secure: secureFlg,
       sameSite: 'none'
-    }
-  );
+  }
+
+  if(path) {
+    options.path = path;
+  }
+
+  // setCookieRefreshToken가 통과 시 이 함수가 호출됨 -> 자동 통과  
+  res.cookie(
+    cookieName,
+    cookieValue,
+    options);
 }
 
 /**
@@ -49,6 +56,29 @@ function getCookie(req, cookieName) {
   return cookieValue;
 }
 
+/**
+ * @param {import("express").Response} res 
+ * @param {string} cookieName 
+ * @param {boolean} httpOnlyFlg 
+ * @param {boolean} secureFlg 
+ * @param {string|null} path
+ */
+function clearCookie(res, cookieName, httpOnlyFlg = true, secureFlg = false, path = null) {
+  const options = {
+    httpOnly: httpOnlyFlg,
+    secure: secureFlg,
+    sameSite: 'none',
+  }
+
+  if(path) {
+    options.path = path;
+  }  
+
+  res.clearCookie(cookieName, options);
+}
+
+
+
 // ------------------
 // ----- pubilc -----
 // ------------------
@@ -66,7 +96,8 @@ function setCookieRefreshToken(res, refreshToken) {
     refreshToken,
     parseInt(process.env.JWT_REFRESH_TOKEN_COOKIE_EXPIRY),
     true,
-    true
+    true,
+    process.env.JWT_REISS_URI
   );
 }
 
@@ -80,11 +111,24 @@ function getCookieRefreshToken(req) {
   
 }
 
+/**
+ *  리프레시 토큰 쿠키 제거
+ */
+function clearCookieRefreshToken(res) {
+  clearCookie(
+    res,
+    process.env.JWT_REFRESH_TOKEN_COOKIE_NAME,
+    true,
+    true,
+    process.env.JWT_REISS_URI
+  );
+}
 
 // ------------------
 // export
 // ------------------
 export default {
   setCookieRefreshToken,
-  getCookieRefreshToken
+  getCookieRefreshToken,
+  clearCookieRefreshToken
 }

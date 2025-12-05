@@ -43,7 +43,7 @@ function generateAccessToken(user) {
   // 페이로드 설정
   const payload = {
     sub: user.id, // payload.sub setting (user PK)
-    role: user.role, //  payload.role setting (user role)
+    role: user.role, // payload.role setting (user role)
   }
 
   // 엑세스 토큰 생성
