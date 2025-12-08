@@ -24,14 +24,32 @@ const attributes = {
     allowNull: false,
     comment: 'user PK',
   },
-  endPoint: {
-    field: 'end_point',
-    type: DataTypes.STRING(255),
+  endpoint: {
+    field: 'endpoint',
+    type: DataTypes.STRING(500),
     allowNull: false,
     unique: true,
     comment: 'push-subscriptions end_point'
     // user마다 다 값이 달라야함. 1과 2의 값을 구분하여 데이터 이상을 막음 
     // end_point 도메인으로 올 거라 값 넉넉히 255
+  },
+  p256dh: {
+    field: 'p256dh',
+    type: DataTypes.STRING(255),
+    allowNull: false, // 필수 항목
+    comment: '공개키',
+  },
+  auth: {
+    field: 'auth',
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    comment: '인증키',
+  },
+  device: {
+    field: 'device',
+    type: DataTypes.STRING(500),
+    allowNull: false,
+    comment: '디바이스',
   },
   createdAt: {
     field: 'created_at',
@@ -74,7 +92,7 @@ const attributes = {
   }
 };
 
-// 모델에서 맵핑을 할때 다루는 속성이라 migration과는 다름 
+// 모델에서 맵핑을 할 때 다루는 속성이라 migration과는 다름 
 const options = {
   tableName: 'push_subscriptions', // 실제 DB 테이블 명
   timestamps: true, // createdAt, updatedAt을 자동 관리
