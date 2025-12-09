@@ -7,7 +7,7 @@
 import webpush from 'web-push';
 
 webpush.setVapidDetails(
-  process.env.JWT_ISSUER, //발행자 
+  `mailto:${process.env.JWT_ISSUER}`, //발행자 
   process.env.VAPID_PUBLIC_KEY, // 공용키
   process.env.VAPID_PRIVATE_KEY // 비밀키
 );
