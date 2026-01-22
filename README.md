@@ -1,17 +1,51 @@
-# pwa2-meerketgram
-| 항목            | 내용                                                       |
-| ------------- | -------------------------------------------------------- |
-| **프로젝트명**     | meerketgram                                                |
-| **설명**        | 사용자들이 게시글과 댓글로 소통하는 커뮤니티형 웹앱                             |
-| **핵심 기능**     | 회원가입/로그인(JWT), 소셜 로그인, 권한(Role) 기반 접근, 사진 업로드, PWA 푸시 알림 |
-| **사용 기술**     | Vite + React 19 (프론트) / Express 5 (백엔드) / MySQL 8.4 (DB) |
-| **SRS**     | [SRS_meertagram.xlsx](https://github.com/user-attachments/files/23586389/SRS_meertagram.xlsx) |
+# sara-s-personal-project  
+my website
 
+# SARAGRAM DESIGN.
+
+<div align="center">
+  <img src="./saragram.png" alt="Saragram Preview" width="70%">
+</div>
+
+<br><br>
+
+## About Me
+
+> **"코드는 단순한 논리의 집합이 아니라, 경험을 설계하는 도구입니다."**
+
+저는 구조와 효율성, 그리고 사용자 경험의 흐름에 집착하는 **풀스택 개발자**입니다.  
+복잡한 기술을 과시하기보다는, 불필요한 요소를 덜어내고 서비스의 본질과 유용성을 드러내는 데 집중합니다.
+
+소셜 미디어부터 공공 데이터 기반의 실시간 서비스, 그리고 B2B 물류 플랫폼까지  
+다양한 도메인의 프로젝트를 직접 설계·구현하며  
+구조적이면서도 확장 가능한 개발을 지향해 왔습니다.
+
+사용자가 말하기 전에 먼저 필요한 것을 읽어내고,  
+그 흐름을 코드로 구현하는 것이 개발자의 역할이라고 믿습니다.
+
+현재 **한국**을 거점으로 활동 중이며, 새로운 프로젝트 제안은 언제나 환영합니다.
+
+<br><br>
+
+## About Me (EN)
+
+> **"Code is not just about logic; it's about crafting an experience."**
+
+I am a **Full-Stack Developer** obsessed with structure, efficiency, and the flow of user experience.  
+Rather than showcasing complexity, I focus on stripping systems down to their core value and purpose.
+
+From social media platforms to real-time public data services and B2B logistics solutions,  
+I have designed and built diverse applications with a structured yet flexible approach.
+
+I believe a developer’s role is not just to write code,  
+but to anticipate user needs and translate them into seamless experiences.
+
+Based in **Korea**, open to global collaboration.
 <br>
 
 # 프로젝트 구조
 ````
-meerkatgram/
+saragram/
 ├── client/             # Vite + React (PWA)
 │   ├── src/                # React 실행 관련 로직
 │   │   ├── assets/             # 비공개 정적 파일
@@ -46,11 +80,6 @@ meerkatgram/
 │   └── .env                # 환경 변수 설정 파일
 └── READEME.md
 ````
-
-<br>
-
-# 프로젝트 디자인
-<img width="1273" height="1221" alt="Image" src="https://github.com/user-attachments/assets/36813f6a-a155-4ffe-a341-8f4413fa4520" />
 
 <br>
 
